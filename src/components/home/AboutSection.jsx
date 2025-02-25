@@ -6,16 +6,19 @@ const AboutSection = () => {
     <section className="py-28 bg-gray-50">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center gap-16">
-          {/* TED logo and "x" explanation */}
+          {/* TEDx logo and "x" explanation */}
           <div className="md:w-1/2 order-2 md:order-1">
-            <div className="flex items-center justify-center mb-8">
-              <div className="bg-tedx-red px-8 py-4 rounded-lg">
-                <h3 className="text-4xl font-bold text-tedx-white">TED</h3>
-              </div>
-              <div className="text-8xl font-light text-tedx-red mx-4">×</div>
-              <div className="border-2 border-tedx-black px-6 py-3 rounded-lg">
-                <h3 className="text-3xl font-light text-tedx-black">independently organized event</h3>
-              </div>
+            {/* Use the actual TEDx logo image */}
+            <div className="mb-8">
+              <img 
+                src="/src/assets/tedx-logo-with-text.png" 
+                alt="TEDx = independently organized TED event" 
+                className="w-full max-w-md"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/400x150?text=TEDx+Logo';
+                }}
+              />
             </div>
             
             <p className="text-gray-700 mb-6">

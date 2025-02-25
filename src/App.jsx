@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 
 // Import other pages when they're created
 // import Events from './pages/Events';
@@ -20,6 +21,7 @@ const App = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             {/* Add other routes when components are created */}
             {/* <Route path="/events" element={<Events />} /> */}
             {/* <Route path="/about" element={<About />} /> */}
