@@ -20,7 +20,7 @@ const FeaturedSpeakers = () => {
       {
         id: 3,
         name: "Deepak Gupta",
-        title: "Co-Founder Bombay Shaving Company",
+        title: "Co-Founder, Bombay Shaving Company",
         //topic: "Creating Impact Through Community-Led Design",
         image: "/src/assets/deepak.png",
       },
