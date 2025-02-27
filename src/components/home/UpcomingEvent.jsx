@@ -19,17 +19,20 @@ const UpcomingEvent = () => {
   const daysRemaining = Math.max(0, Math.ceil(timeRemaining / (1000 * 60 * 60 * 24)));
 
   return (
-    <section className="py-24 bg-tedx-white">
+    <section className="py-24 bg-tedx-black text-tedx-white relative">
+      {/* Divider between sections */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tedx-red via-gray-800 to-tedx-black"></div>
+      
       <div className="container mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-tedx-black">Next Event</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-tedx-white">Next Event</h2>
           <div className="h-1 w-24 bg-tedx-red mx-auto mt-3"></div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-12 items-center">
           {/* Event Image */}
           <div className="md:w-1/2">
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
                 src={nextEvent.image} 
                 alt={nextEvent.title} 
@@ -44,21 +47,21 @@ const UpcomingEvent = () => {
 
           {/* Event Details */}
           <div className="md:w-1/2">
-            <h3 className="text-2xl font-bold text-tedx-black mb-4">{nextEvent.title}</h3>
+            <h3 className="text-2xl font-bold text-tedx-white mb-4">{nextEvent.title}</h3>
             <div className="mb-6 space-y-2">
-              <p className="flex items-center text-gray-700">
+              <p className="flex items-center text-gray-300">
                 <svg className="w-5 h-5 mr-2 text-tedx-red" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                 </svg>
                 {nextEvent.date}
               </p>
-              <p className="flex items-center text-gray-700">
+              <p className="flex items-center text-gray-300">
                 <svg className="w-5 h-5 mr-2 text-tedx-red" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                 </svg>
                 {nextEvent.time}
               </p>
-              <p className="flex items-center text-gray-700">
+              <p className="flex items-center text-gray-300">
                 <svg className="w-5 h-5 mr-2 text-tedx-red" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
@@ -66,14 +69,14 @@ const UpcomingEvent = () => {
               </p>
             </div>
             
-            <p className="text-gray-700 mb-6">{nextEvent.description}</p>
+            <p className="text-gray-300 mb-6">{nextEvent.description}</p>
             
             {/* Countdown */}
-            <div className="bg-gray-100 p-4 rounded-lg mb-6">
+            <div className="bg-[#1a1a1a] border border-gray-800 p-4 rounded-lg mb-6">
               <h4 className="text-tedx-red font-bold text-lg mb-2">Event Countdown</h4>
               <div className="flex items-center justify-center">
-                <div className="text-3xl font-bold text-tedx-black">{daysRemaining}</div>
-                <div className="ml-2 text-gray-700">days remaining</div>
+                <div className="text-3xl font-bold text-tedx-white">{daysRemaining}</div>
+                <div className="ml-2 text-gray-300">days remaining</div>
               </div>
             </div>
             
@@ -86,7 +89,7 @@ const UpcomingEvent = () => {
               </Link>
               <Link 
                 to="/get-involved" 
-                className="bg-tedx-black hover:bg-gray-800 text-tedx-white font-bold py-2 px-6 rounded-lg transition duration-300"
+                className="border-2 border-tedx-white hover:border-tedx-red hover:text-tedx-red text-tedx-white font-bold py-2 px-6 rounded-lg transition duration-300"
               >
                 Register Now
               </Link>

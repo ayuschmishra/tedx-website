@@ -4,10 +4,9 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import Events from './pages/Events';
 
 // Import other pages when they're created
-// import Events from './pages/Events';
-// import About from './pages/About';
 // import GetInvolved from './pages/GetInvolved';
 
 const App = () => {
@@ -22,9 +21,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/events" element={<Events />} />
             {/* Add other routes when components are created */}
-            {/* <Route path="/events" element={<Events />} /> */}
-            {/* <Route path="/about" element={<About />} /> */}
             {/* <Route path="/get-involved" element={<GetInvolved />} /> */}
           </Routes>
         </main>

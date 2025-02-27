@@ -5,6 +5,7 @@ import UpcomingEvent from '../components/home/UpcomingEvent';
 import AboutSection from '../components/home/AboutSection';
 import FeaturedSpeakers from '../components/home/FeaturedSpeakers';
 
+
 const Home = () => {
   return (
     <div>

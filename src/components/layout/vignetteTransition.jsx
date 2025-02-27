@@ -3,16 +3,15 @@ import React from 'react';
 
 const VignetteTransition = () => {
   return (
-    <div className="relative h-24 overflow-hidden">
-      {/* Top vignette (fading from hero section) */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-full bg-gradient-to-b from-tedx-black to-transparent z-10"
-      ></div>
+    <div className="relative h-16 overflow-hidden">
+      {/* Red line divider like in the image */}
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-tedx-red z-30"></div>
       
-      {/* Bottom vignette (fading to upcoming event section) */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-tedx-white to-transparent z-20"
-      ></div>
+      {/* Subtle gradient overlay to create depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/40 z-20"></div>
+      
+      {/* Black base for consistent background */}
+      <div className="absolute inset-0 bg-tedx-black z-10"></div>
     </div>
   );
 };
