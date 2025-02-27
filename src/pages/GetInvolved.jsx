@@ -1,6 +1,9 @@
 // src/pages/GetInvolved.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import TimelineProcess from '../components/get-involved/TimelineProcess';
+import ProcessSteps from '../components/get-involved/ProcessSteps';
+import headTexture from '../assets/headtexture.png';
 
 const GetInvolved = () => {
   // State for form inputs
@@ -14,18 +17,6 @@ const GetInvolved = () => {
 
   // State for form submission
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
-  // State for animation
-  const [animatedItem, setAnimatedItem] = useState(0);
-
-  // Effect for process step animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimatedItem(prev => (prev < 4 ? prev + 1 : 0));
-    }, 2000);
-    
-    return () => clearInterval(interval);
-  }, []);
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -132,28 +123,6 @@ const GetInvolved = () => {
     }
   ];
 
-  // Process steps
-  const processSteps = [
-    {
-      number: 1,
-      title: "Apply for TEDx",
-      description: "Select your ticket type and complete a short application to tell us more about you.",
-      image: "/src/assets/opbanner1.png"
-    },
-    {
-      number: 2,
-      title: "Give us time to review",
-      description: "We review every application carefully to grow the community in a thoughtful way.",
-      image: "/src/assets/opbanner2.png"
-    },
-    {
-      number: 3,
-      title: "Join TEDx",
-      description: "After approval you'll receive your registration details to join this unique experience.",
-      image: "/src/assets/opbanner3.png"
-    }
-  ];
-
   return (
     <div className="bg-black text-white">
       {/* Hero Section */}
@@ -225,92 +194,11 @@ const GetInvolved = () => {
         </div>
       </section>
       
-      {/* Process Timeline Section with Image Cards */}
-      <section className="py-24 bg-black">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Our Process</h2>
-            <div className="h-1 w-24 bg-tedx-red mx-auto mt-3"></div>
-            <p className="mt-6 text-lg text-gray-300 max-w-3xl mx-auto">
-              Here's what you can expect when you decide to get involved with TEDxShivajiCollege
-            </p>
-          </div>
-          
-          <div className="max-w-6xl mx-auto relative">
-            {/* Connecting swirling line */}
-            <div className="hidden md:block absolute z-0">
-              <svg width="100%" height="400" viewBox="0 0 1200 400" className="absolute top-1/2 left-0 -translate-y-1/2">
-                <path 
-                  d="M100,200 C300,100 500,300 700,200 C900,100 1100,300 1300,200" 
-                  fill="none" 
-                  stroke="#e62b1e" 
-                  strokeWidth="6" 
-                  strokeDasharray="10,10"
-                  className="path-animation"
-                />
-                <circle cx="200" cy="200" r="12" fill="#e62b1e" />
-                <circle cx="600" cy="200" r="12" fill="#e62b1e" />
-                <circle cx="1000" cy="200" r="12" fill="#e62b1e" />
-              </svg>
-            </div>
-            
-            {/* Mobile connecting line (vertical) */}
-            <div className="md:hidden absolute top-0 bottom-0 left-1/2 w-1 bg-tedx-red transform -translate-x-1/2 z-0"></div>
-            
-            {/* Process steps as image cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-              {processSteps.map((step, index) => (
-                <div 
-                  key={index} 
-                  className={`transform transition-all duration-700 ${animatedItem === index + 1 ? 'scale-105' : 'scale-100'}`}
-                >
-                  <div className="relative overflow-hidden rounded-lg shadow-2xl h-full">
-                    {/* Image as background */}
-                    <div className="h-60 md:h-72 overflow-hidden relative">
-                      <img 
-                        src={step.image} 
-                        alt={`Step ${step.number}: ${step.title}`} 
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                      
-                      {/* Step number badge */}
-                      <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-tedx-red flex items-center justify-center text-white font-bold text-lg">
-                        {step.number}
-                      </div>
-                      
-                      {/* Step title overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-2xl font-bold text-white">{step.title}</h3>
-                      </div>
-                    </div>
-                    
-                    {/* Description */}
-                    <div className="p-6 bg-[#161616] border-t-2 border-tedx-red">
-                      <p className="text-gray-300">{step.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {/* CSS for path animation */}
-        <style jsx>{`
-          .path-animation {
-            stroke-dashoffset: 1000;
-            animation: dash 5s linear forwards infinite;
-          }
-          
-          @keyframes dash {
-            to {
-              stroke-dashoffset: 0;
-            }
-          }
-        `}</style>
-      </section>
+      {/* Process Timeline Section */}
+      <ProcessSteps />
+      
+      {/* Alternative Timeline Presentation - Uncomment to use instead of ProcessSteps */}
+      {/* <TimelineProcess /> */}
       
       {/* FAQ Section */}
       <section className="py-24 bg-black">
@@ -451,8 +339,30 @@ const GetInvolved = () => {
         </div>
       </section>
       
+      {/* Theme Kaleidoscope Section - Simplified with just the heading */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-12 lg:px-12">
+          <div className="max-w-8xl mx-auto text-center">
+            {/* Theme headings with gradient text */}
+            <h2 
+              className="text-6xl md:text-8xl lg:text-9xl font-bold mb-16 text-center animate-on-scroll"
+              style={{
+              background: `url(${headTexture}) blue repeat 40% 100%`,
+              WebkitBackgroundClip: "text",
+              backgrondSize: 'cover',
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              color: "transparent"
+              }}
+            >
+             Thank You <br/> See You in the Event
+            </h2>
+          </div>
+        </div>
+      </section>
+      
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-black to-[#150505] py-20">
+      <section className="py-16 bg-gradient-to-r from-black to-[#150505]">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Community</h2>
@@ -469,7 +379,7 @@ const GetInvolved = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-tedx-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:-translate-y-1"
+                  className="bg-tedx-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:-translate-y-1"
                 >
                   Subscribe
                 </button>

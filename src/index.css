@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import animations */
+@import './styles/animations.css';
+
 /* Additional custom styles can be added here */
 body {
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -41,4 +44,53 @@ p {
   .backdrop-blur-md {
     background-color: rgba(0, 0, 0, 0.85) !important;
   }
+}
+
+/* Timeline connector line styles */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  top: 0;
+  bottom: 0;
+  background-color: #e62b1e;
+  z-index: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #e62b1e;
+  border: 3px solid #000;
+  z-index: 1;
+}
+
+/* Process step card styles */
+.process-card {
+  transition: all 0.5s ease;
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(230, 43, 30, 0.1), 0 10px 10px -5px rgba(230, 43, 30, 0.04);
+}
+
+/* TEDx gradient */
+.tedx-gradient {
+  background: linear-gradient(135deg, #e62b1e 0%, #e62b1e 100%);
+}
+
+/* Custom animation for timeline steps */
+.step-highlight {
+  transition: all 0.3s ease;
+}
+
+.step-highlight.active {
+  border-color: #e62b1e;
+  box-shadow: 0 0 15px rgba(230, 43, 30, 0.3);
 }

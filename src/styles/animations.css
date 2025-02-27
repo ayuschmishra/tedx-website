@@ -1,0 +1,153 @@
+/* src/styles/animations.css */
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  /* Fade-in from left to right */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+  
+  /* Fade-in from right to left */
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-fade-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+  
+  /* Path animation for lines */
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+  
+  .path-animation {
+    stroke-dashoffset: 100;
+    animation: dash 15s linear forwards infinite;
+  }
+  
+  /* Pulse animation for circles */
+  @keyframes pulse {
+    0% { 
+      r: 8; 
+      opacity: 0.7; 
+    }
+    50% { 
+      r: 12; 
+      opacity: 1; 
+    }
+    100% { 
+      r: 8; 
+      opacity: 0.7; 
+    }
+  }
+  
+  .pulse-circle {
+    animation: pulse 2s infinite;
+  }
+  
+  /* Scale animation */
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animate-scale {
+    animation: scale 3s ease-in-out infinite;
+  }
+  
+  /* Delayed animations - useful for sequence animations */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  /* Intersection Observer utilities */
+  .io-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .io-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .io-animate-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .io-animate-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .io-animate-right {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .io-animate-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
