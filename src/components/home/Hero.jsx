@@ -1,22 +1,34 @@
 // src/components/home/Hero.jsx
 import { Link } from 'react-router-dom';
 
+// If you have a video background, you could reference it like this (from public folder):
+// const videoBackground = "/videos/home-banner.mp4";
+
 const Hero = () => {
   return (
     <div className="relative bg-tedx-black h-screen flex items-center">
       {/* Overlay for better text visibility */}
       <div className="absolute inset-0 bg-gradient-to-r from-tedx-black to-transparent opacity-70"></div>
       
-      {/* Background Image (you'll need to add an actual image to your assets folder) */}
+      {/* 
+        Background Video - using a URL that seems more stable
+        For local development, you should put your video in the public folder
+        and reference it with just the path like "/videos/home-banner.mp4"
+      */}
       <video 
         className="absolute inset-0 w-full h-full object-cover"
         loop
         muted
         autoPlay
         playsInline
-        src="https://cdn.prod.website-files.com/62165efbce6bcc862200724a%2F67082a0cef3a219a8958dab2_HomeBanner-transcode.mp4"
-        data-wf-ignore="true"
-      ></video>
+      >
+        <source 
+          src="https://cdn.prod.website-files.com/62165efbce6bcc862200724a/67082a0cef3a219a8958dab2_HomeBanner-transcode.mp4" 
+          type="video/mp4" 
+        />
+        {/* Fallback text if video fails to load */}
+        Your browser does not support the video tag.
+      </video>
       
       {/* Vignette effect at the bottom for transition */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-tedx-white via-tedx-white/80 to-transparent z-10"></div>

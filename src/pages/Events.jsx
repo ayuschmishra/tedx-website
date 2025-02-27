@@ -1,15 +1,18 @@
 // src/pages/Events.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+// Import images directly
 import kaiftbnl from '../assets/kaiftbnl.png';
 import naghmatbnl from '../assets/naghmatbnl.png';
 import vrtikatbnl from '../assets/vrtikatbnl.png';
 import prttbnl from '../assets/prtbnl.png';
+import eventBanner from '../assets/event-banner.png';
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState('event');
 
-  // Upcoming event data
+  // Upcoming event data with imported image
   const upcomingEvent = {
     title: "TEDxShivajiCollege 2025: Kaleidoscope",
     date: "April 15, 2025",
@@ -17,20 +20,19 @@ const Events = () => {
     location: "ShivajiCollege Auditorium",
     description: "Join us for a day of groundbreaking ideas and inspirational talks as we explore a Kaleidoscope of infinite possibilities.",
     ticketsAvailable: true,
-    featuredImage: "/src/assets/event-banner.png",
+    featuredImage: eventBanner, // Use the imported image
     theme: {
       title: "Kaleidoscope",
       description: "From The Lens of Infinite Possibilities"
     }
   };
 
-  // Past events data
+  // Past events data with imported images
   const pastEvents = [
     {
       id: 1,
       title: "Hope Behind Bars",
-      //*date: "March 20, 2024",
-      image: vrtikatbnl,
+      image: vrtikatbnl, // Use the imported image
       speakers: [
         { name: "Vartika Nanda ", topic: "Journalist" }
       ]
@@ -38,8 +40,7 @@ const Events = () => {
     {
       id: 2,
       title: "Life hits refresh ? It's time to choose your",
-      //*date: "February 15, 2023",
-      image: kaiftbnl,
+      image: kaiftbnl, // Use the imported image
       speakers: [
         { name: "Mohommad Kaif", topic: "Athelete" }
       ]
@@ -47,8 +48,7 @@ const Events = () => {
     {
       id: 3,
       title: "Expanding Gamut of Success",
-      //*date: "February 15, 2023",
-      image: prttbnl,
+      image: prttbnl, // Use the imported image
       speakers: [
         { name: "Paritosh Tripathi", topic: "Actor" }
       ]
@@ -56,8 +56,7 @@ const Events = () => {
     {
       id: 4,
       title: "Responsibilities of a Journalist",
-      //*date: "February 15, 2023",
-      image: naghmatbnl,
+      image: naghmatbnl, // Use the imported image
       speakers: [
         { name: "Nagma Sahar", topic: "Journalist" }
       ]
@@ -150,7 +149,7 @@ const Events = () => {
         {/* Background overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black to-black/40 z-10"></div>
         
-        {/* Background image */}
+        {/* Background image - use imported image with proper fallback */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -171,12 +170,10 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Navigation Buttons - Centered without divider, SMALLER SIZE */}
+      {/* Navigation Buttons */}
       <section className="py-12 bg-black">
         <div className="container mx-auto px-6 lg:px-8">
-          {/* This div controls the button positioning and spacing */}
           <div className="flex justify-center gap-4">
-            {/* These are the navigation buttons - you can adjust the px-6 and py-2 values to change size */}
             <button
               onClick={() => setActiveTab('event')}
               className={`bg-tedx-red text-white font-bold px-6 py-2 rounded-full text-base transition-all duration-300 ${
@@ -199,7 +196,7 @@ const Events = () => {
 
       {/* Dynamic Content Based on Active Tab */}
       <div className="container mx-auto px-6 lg:px-8 py-16">
-        {/* Event Content (Merged - now includes event details and schedule) */}
+        {/* Event Content */}
         {activeTab === 'event' && (
           <div>
             {/* Event Information */}
@@ -228,7 +225,6 @@ const Events = () => {
                 <p className="text-lg mb-8">{upcomingEvent.description}</p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  {/* This is the "View Highlights" button - adjust px-5 and py-2 to change size */}
                   <button className="bg-tedx-red hover:bg-red-700 text-white py-2 px-5 rounded-full font-bold transition duration-300">
                     View Highlights
                   </button>
@@ -241,7 +237,7 @@ const Events = () => {
               <div className="relative">
                 <div className="absolute -top-8 -right-8 w-64 h-64 bg-tedx-red opacity-30 rounded-full blur-3xl"></div>
                 <img 
-                  src={upcomingEvent.featuredImage || "https://via.placeholder.com/600x400?text=TEDx+Event"} 
+                  src={upcomingEvent.featuredImage} 
                   alt={upcomingEvent.title}
                   className="w-full h-auto rounded-lg shadow-2xl relative z-10"
                   onError={(e) => {
@@ -253,7 +249,7 @@ const Events = () => {
               </div>
             </div>
             
-            {/* Event Schedule/Timetable - Exact match to reference */}
+            {/* Event Schedule/Timetable */}
             <div className="mt-16">
               <div className="text-center mb-16">
                 <h2 className="text-4xl font-bold mb-4">Event Schedule</h2>
@@ -262,12 +258,12 @@ const Events = () => {
                 </p>
               </div>
               
-              {/* Exact timetable matching the reference - more compact */}
+              {/* Timetable */}
               <div className="w-full max-w-[600px] mx-auto bg-[#161616] rounded-xl overflow-hidden shadow-xl">
                 {/* Header */}
                 <div className="py-4 px-6 bg-[#111111]">
-                  <h3 className="text-center text-sm font-medium tracking-widest text-white uppercase">TIMETABLE</h3>
-                  <h4 className="text-center text-[2.2rem] font-bold mt-1 leading-none text-white tracking-tight">YOU MISSED OUR SPEAKERS</h4>
+                  <h3 className="text-center text-sm font-medium tracking-widest text-white uppercase">EVENT</h3>
+                  <h4 className="text-center text-[2.2rem] font-bold mt-1 leading-none text-white tracking-tight">SCHEDULE</h4>
                 </div>
                 
                 {/* Table Header */}
@@ -349,8 +345,6 @@ const Events = () => {
                     </div>
                     
                     <div className="flex justify-between items-center">
-                      {/* This is another "View Highlights" button - adjust px-5 and py-2 to change size */}
-                      
                       <button className="text-tedx-red hover:underline flex items-center">
                         Watch Talks
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">

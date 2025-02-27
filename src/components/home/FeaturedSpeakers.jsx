@@ -1,35 +1,38 @@
 // src/components/home/FeaturedSpeakers.jsx
+import { useState } from 'react';
+
+// Import images directly
+import mhmdkaif from '../../assets/mhmdkaif.png';
+import vartikananda from '../../assets/vartikananda.png';
+import deepak from '../../assets/deepak.png';
+import paritosh from '../../assets/paritosh.png';
 
 const FeaturedSpeakers = () => {
-    // Sample speakers data (would typically come from API/CMS)
+    // Sample speakers data with imported images
     const speakers = [
       {
         id: 1,
         name: "Mohammad Kaif",
         title: "Former Indian Cricketer",
-        //topic: "The Human Side of Artificial Intelligence",
-        image: "/src/assets/mhmdkaif.png",
+        image: mhmdkaif, // Use the imported image
       },
       {
         id: 2,
         name: "Vartika Nanda",
         title: "Indian Journalist",
-        //topic: "Reimagining Sustainability for Urban Centers",
-        image: "/src/assets/vartikananda.png",
+        image: vartikananda, // Use the imported image
       },
       {
         id: 3,
         name: "Deepak Gupta",
-        title: "Co-Founder,Bombay Shaving Company",
-        //topic: "Creating Impact Through Community-Led Design",
-        image: "/src/assets/deepak.png",
+        title: "Co-Founder, Bombay Shaving Company",
+        image: deepak, // Use the imported image
       },
       {
         id: 4,
         name: "Paritosh Tripathi",
         title: "Actor",
-        //topic: "The Next Revolution in Computing",
-        image: "/src/assets/paritosh.png",
+        image: paritosh, // Use the imported image
       },
     ];
   

@@ -1,6 +1,9 @@
 // src/components/home/UpcomingEvent.jsx
 import { Link } from 'react-router-dom';
 
+// Import event banner image directly
+import eventBanner from '../../assets/event-banner.png';
+
 const UpcomingEvent = () => {
   // This would typically come from an API or CMS
   const nextEvent = {
@@ -8,7 +11,7 @@ const UpcomingEvent = () => {
     date: "April 15, 2025",
     time: "10:00 AM - 5:00 PM",
     location: "ShivajiCollege Auditorium",
-    image: "/src/assets/event-banner.png", // Add this image to your assets folder
+    image: eventBanner, // Use the imported image
     description: "Join us for a day of groundbreaking ideas and inspirational talks as we reimagine our future together."
   };
 

@@ -1,7 +1,7 @@
 // src/components/home/AboutSection.jsx
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
-// Import the local image
+// Import the image properly
 import headTexture from '../../assets/headtexture.png';
 
 const AboutSection = () => {
