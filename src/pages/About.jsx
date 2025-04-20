@@ -216,7 +216,7 @@ const About = () => {
   return (
     <div>
       {/* About Hero */}
-      <section className="py-24 bg-tedx-black text-tedx-white">
+      <section className="py-24 bg-black text-tedx-white">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
