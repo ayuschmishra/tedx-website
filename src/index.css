@@ -1,10 +1,8 @@
 /* src/index.css */
+@import './styles/animations.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import animations */
-@import './styles/animations.css';
 
 /* Additional custom styles can be added here */
 body {
