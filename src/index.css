@@ -11,16 +11,19 @@ body {
 
 /* Add padding to account for fixed header */
 main {
-  padding-top: 5rem; /* Adjusted for the enhanced header height */
+  padding-top: 5rem;
+  /* Adjusted for the enhanced header height */
 }
 
-/* Space between sections */
-section + section {
-  margin-top: 2rem;
-}
+
 
 /* Improve typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   letter-spacing: -0.025em;
   line-height: 1.2;
 }

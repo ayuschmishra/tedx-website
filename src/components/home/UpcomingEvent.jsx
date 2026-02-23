@@ -23,9 +23,7 @@ const UpcomingEvent = () => {
 
   return (
     <section className="py-24 bg-tedx-black text-tedx-white relative">
-      {/* Divider between sections */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tedx-red via-gray-800 to-tedx-black"></div>
-      
+
       <div className="container mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-tedx-white">Next Event</h2>
@@ -36,9 +34,9 @@ const UpcomingEvent = () => {
           {/* Event Image */}
           <div className="md:w-1/2">
             <div className="rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src={nextEvent.image} 
-                alt={nextEvent.title} 
+              <img
+                src={nextEvent.image}
+                alt={nextEvent.title}
                 className="w-full h-auto"
                 onError={(e) => {
                   e.target.onerror = null;
@@ -71,9 +69,9 @@ const UpcomingEvent = () => {
                 {nextEvent.location}
               </p>
             </div>
-            
+
             <p className="text-gray-300 mb-6">{nextEvent.description}</p>
-            
+
             {/* Countdown */}
             <div className="bg-[#1a1a1a] border border-gray-800 p-4 rounded-lg mb-6">
               <h4 className="text-tedx-red font-bold text-lg mb-2">Event Countdown</h4>
@@ -82,16 +80,16 @@ const UpcomingEvent = () => {
                 <div className="ml-2 text-gray-300">days remaining</div>
               </div>
             </div>
-            
+
             <div className="flex space-x-4">
-              <Link 
-                to="/events" 
+              <Link
+                to="/events"
                 className="bg-tedx-red hover:bg-red-700 text-tedx-white font-bold py-2 px-6 rounded-lg transition duration-300"
               >
                 Learn More
               </Link>
-              <Link 
-                to="/get-involved" 
+              <Link
+                to="/get-involved"
                 className="border-2 border-tedx-white hover:border-tedx-red hover:text-tedx-red text-tedx-white font-bold py-2 px-6 rounded-lg transition duration-300"
               >
                 Register Now
