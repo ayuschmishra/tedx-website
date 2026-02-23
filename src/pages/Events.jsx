@@ -14,16 +14,16 @@ const Events = () => {
 
   // Upcoming event data with imported image
   const upcomingEvent = {
-    title: "TEDxShivajiCollege 2025: Kaleidoscope",
-    date: "April 15, 2025",
+    title: "TEDxShivajiCollege 2025: Gravity & Glitch",
+    date: "To be revealed",
     time: "10:00 AM - 5:00 PM",
     location: "ShivajiCollege Auditorium",
-    description: "Join us for a day of groundbreaking ideas and inspirational talks as we explore a Kaleidoscope of infinite possibilities.",
+    description: "Join us for a day of groundbreaking ideas and inspirational talks",
     ticketsAvailable: true,
     featuredImage: eventBanner, // Use the imported image
     theme: {
-      title: "Kaleidoscope",
-      description: "From The Lens of Infinite Possibilities"
+      title: "Gravity & Glitch",
+      description: "Errors That Change the Equations"
     }
   };
 
@@ -148,16 +148,16 @@ const Events = () => {
       <section className="relative h-[60vh] flex items-center">
         {/* Background overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black to-black/40 z-10"></div>
-        
+
         {/* Background image - use imported image with proper fallback */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${upcomingEvent.featuredImage || 'https://via.placeholder.com/1920x1080?text=TEDx+Event'})`,
             backgroundPosition: 'center 30%'
           }}
         ></div>
-        
+
         <div className="container mx-auto px-6 lg:px-8 relative z-20">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
@@ -176,17 +176,15 @@ const Events = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={() => setActiveTab('event')}
-              className={`bg-tedx-red text-white font-bold px-6 py-2 rounded-full text-base transition-all duration-300 ${
-                activeTab === 'event' ? 'opacity-100' : 'opacity-70 hover:opacity-90'
-              }`}
+              className={`bg-tedx-red text-white font-bold px-6 py-2 rounded-full text-base transition-all duration-300 ${activeTab === 'event' ? 'opacity-100' : 'opacity-70 hover:opacity-90'
+                }`}
             >
               Event
             </button>
             <button
               onClick={() => setActiveTab('past')}
-              className={`bg-tedx-red text-white font-bold px-6 py-2 rounded-full text-base transition-all duration-300 ${
-                activeTab === 'past' ? 'opacity-100' : 'opacity-70 hover:opacity-90'
-              }`}
+              className={`bg-tedx-red text-white font-bold px-6 py-2 rounded-full text-base transition-all duration-300 ${activeTab === 'past' ? 'opacity-100' : 'opacity-70 hover:opacity-90'
+                }`}
             >
               Past Events
             </button>
@@ -203,27 +201,27 @@ const Events = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
               <div>
                 <h2 className="text-4xl font-bold mb-6">{upcomingEvent.title}</h2>
-                
+
                 <div className="flex items-center text-lg mb-6">
                   <div className="bg-tedx-red rounded-full w-4 h-4 mr-3"></div>
                   <span className="mr-8">{upcomingEvent.date}</span>
                   <span>{upcomingEvent.time}</span>
                 </div>
-                
+
                 <div className="mb-6 flex items-center text-gray-300">
                   <svg className="w-5 h-5 mr-2 text-tedx-red" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                   {upcomingEvent.location}
                 </div>
-                
+
                 <div className="mb-8">
                   <h3 className="text-2xl font-bold text-tedx-red mb-2">{upcomingEvent.theme.title}</h3>
                   <p className="text-xl italic">{upcomingEvent.theme.description}</p>
                 </div>
-                
+
                 <p className="text-lg mb-8">{upcomingEvent.description}</p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-tedx-red hover:bg-red-700 text-white py-2 px-5 rounded-full font-bold transition duration-300">
                     View Highlights
@@ -233,11 +231,11 @@ const Events = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="relative">
                 <div className="absolute -top-8 -right-8 w-64 h-64 bg-tedx-red opacity-30 rounded-full blur-3xl"></div>
-                <img 
-                  src={upcomingEvent.featuredImage} 
+                <img
+                  src={upcomingEvent.featuredImage}
                   alt={upcomingEvent.title}
                   className="w-full h-auto rounded-lg shadow-2xl relative z-10"
                   onError={(e) => {
@@ -248,7 +246,7 @@ const Events = () => {
                 <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-red-900 opacity-40 rounded-full blur-3xl"></div>
               </div>
             </div>
-            
+
             {/* Event Schedule/Timetable */}
             <div className="mt-16">
               <div className="text-center mb-16">
@@ -257,7 +255,7 @@ const Events = () => {
                   Join us for a full day of inspiring talks and meaningful connections
                 </p>
               </div>
-              
+
               {/* Timetable */}
               <div className="w-full max-w-[600px] mx-auto bg-[#161616] rounded-xl overflow-hidden shadow-xl">
                 {/* Header */}
@@ -265,17 +263,17 @@ const Events = () => {
                   <h3 className="text-center text-sm font-medium tracking-widest text-white uppercase">EVENT</h3>
                   <h4 className="text-center text-[2.2rem] font-bold mt-1 leading-none text-white tracking-tight">SCHEDULE</h4>
                 </div>
-                
+
                 {/* Table Header */}
                 <div className="grid grid-cols-6 py-2 px-6 border-b border-[#2a2a2a] text-[#999999]">
                   <div className="col-span-4 font-bold text-xs uppercase tracking-wide">SPEAKER</div>
                   <div className="col-span-2 text-right font-bold text-xs uppercase tracking-wide">TIME</div>
                 </div>
-                
+
                 {/* Speaker Rows */}
                 {pastEventSpeakers.map((speaker, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="grid grid-cols-6 py-3 px-6 border-b border-[#2a2a2a]"
                   >
                     <div className="col-span-4">
@@ -289,7 +287,7 @@ const Events = () => {
                     </div>
                   </div>
                 ))}
-                
+
                 {/* Footer */}
                 <div className="py-6 px-6 text-center bg-[#111111]">
                   <p className="text-[#777777] text-xs font-medium tracking-wide uppercase">
@@ -312,22 +310,22 @@ const Events = () => {
                 Explore our previous TEDx events and the ideas that were shared
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
               {pastEvents.map(event => (
-                <div 
-                  key={event.id} 
+                <div
+                  key={event.id}
                   className="bg-[#111111] rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105"
                 >
-                  <img 
-                    src={event.image} 
-                    alt={event.title} 
+                  <img
+                    src={event.image}
+                    alt={event.title}
                     className="w-full h-64 object-cover"
                   />
                   <div className="p-8">
                     <div className="text-sm text-tedx-red font-bold mb-3">{event.date}</div>
                     <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
-                    
+
                     <div className="mb-6">
                       <h4 className="font-bold text-gray-400 mb-2">Featured Speaker:</h4>
                       <ul className="space-y-2">
@@ -343,7 +341,7 @@ const Events = () => {
                         ))}
                       </ul>
                     </div>
-                    
+
                     <div className="flex justify-between items-center">
                       <button className="text-tedx-red hover:underline flex items-center">
                         Watch Talks
@@ -368,14 +366,14 @@ const Events = () => {
             Whether you're interested in attending, volunteering, or partnering with us, we'd love to have you join our community.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link 
-              to="/get-involved" 
+            <Link
+              to="/get-involved"
               className="bg-tedx-red hover:bg-red-700 text-white py-2 px-6 rounded-full font-bold transition duration-300"
             >
               Get Involved
             </Link>
-            <a 
-              href="mailto:info@tedxshivajicollege.org" 
+            <a
+              href="mailto:info@tedxshivajicollege.org"
               className="border-2 border-white hover:border-tedx-red hover:text-tedx-red text-white py-2 px-6 rounded-lg font-bold transition duration-300"
             >
               Contact Us

@@ -7,19 +7,15 @@ import eventBanner from '../../assets/event-banner.png';
 const UpcomingEvent = () => {
   // This would typically come from an API or CMS
   const nextEvent = {
-    title: "TEDxShivajiCollege 2025: Reimagine",
-    date: "April 15, 2025",
+    title: "TEDxShivajiCollege 2025: Gravity & Glitch",
+    date: "To be revealed",
     time: "10:00 AM - 5:00 PM",
     location: "ShivajiCollege Auditorium",
     image: eventBanner, // Use the imported image
-    description: "Join us for a day of groundbreaking ideas and inspirational talks as we reimagine our future together."
+    description: "Join us for a day of groundbreaking ideas and inspirational talks"
   };
 
-  // Calculate days remaining until event
-  const eventDate = new Date('April 15, 2025');
-  const currentDate = new Date();
-  const timeRemaining = eventDate - currentDate;
-  const daysRemaining = Math.max(0, Math.ceil(timeRemaining / (1000 * 60 * 60 * 24)));
+  // Countdown removed for now since date is To be revealed
 
   return (
     <section className="py-24 bg-tedx-black text-tedx-white relative">
@@ -74,10 +70,8 @@ const UpcomingEvent = () => {
 
             {/* Countdown */}
             <div className="bg-[#1a1a1a] border border-gray-800 p-4 rounded-lg mb-6">
-              <h4 className="text-tedx-red font-bold text-lg mb-2">Event Countdown</h4>
               <div className="flex items-center justify-center">
-                <div className="text-3xl font-bold text-tedx-white">{daysRemaining}</div>
-                <div className="ml-2 text-gray-300">days remaining</div>
+                <div className="text-3xl font-bold text-tedx-white tracking-widest uppercase">Coming soon</div>
               </div>
             </div>
 
