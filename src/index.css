@@ -11,8 +11,7 @@ body {
 
 /* Add padding to account for fixed header */
 main {
-  padding-top: 5rem;
-  /* Adjusted for the enhanced header height */
+  /* Padding removed to allow transparent header to overlap hero section */
 }
 
 

@@ -25,12 +25,11 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed w-full top-0 z-50 text-tedx-white backdrop-blur-md border-b border-white/10 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-tedx-black/80' 
-        : 'bg-tedx-black/40'
-    }`}>
-      <div className="container mx-auto px-6 lg:px-8 py-5 flex justify-between items-center">
+    <header className={`fixed z-50 text-tedx-white transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] left-1/2 -translate-x-1/2 ${isScrolled
+        ? 'top-4 w-[calc(100%-2rem)] max-w-5xl rounded-full bg-[#1a1c23]/90 backdrop-blur-xl border border-white/10 shadow-2xl py-3 px-6'
+        : 'top-0 w-full max-w-full rounded-none bg-transparent py-5 px-6 lg:px-8 border-b border-transparent'
+      }`}>
+      <div className="flex justify-between items-center w-full">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <span className="text-tedx-red font-bold text-2xl drop-shadow-sm">TEDx</span>
@@ -58,7 +57,7 @@ const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-tedx-white focus:outline-none"
           onClick={toggleMenu}
         >
@@ -76,29 +75,29 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden backdrop-blur-md bg-tedx-black/90">
           <div className="px-4 py-2 space-y-4">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="block hover:text-tedx-red transition duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
-            <Link 
-              to="/events" 
+            <Link
+              to="/events"
               className="block hover:text-tedx-red transition duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               Events
             </Link>
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="block hover:text-tedx-red transition duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
-            <Link 
-              to="/get-involved" 
+            <Link
+              to="/get-involved"
               className="block hover:text-tedx-red transition duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
