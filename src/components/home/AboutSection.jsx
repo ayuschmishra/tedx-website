@@ -9,22 +9,22 @@ const AboutSection = () => {
   useEffect(() => {
     const animateOnScroll = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
-      
+
       elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementBottom = element.getBoundingClientRect().bottom;
-        
+
         // Check if element is in viewport
         if (elementTop < window.innerHeight && elementBottom > 0) {
           element.classList.add('fade-in-up');
         }
       });
     };
-    
+
     // Run on mount and add scroll listener
     animateOnScroll();
     window.addEventListener('scroll', animateOnScroll);
-    
+
     // Clean up
     return () => window.removeEventListener('scroll', animateOnScroll);
   }, []);
@@ -34,7 +34,7 @@ const AboutSection = () => {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-col items-center">
           {/* Theme heading with background clip text */}
-          <h2 
+          <h2
             className="text-5xl md:text-6xl lg:text-8xl font-bold mb-16 text-center animate-on-scroll"
             style={{
               background: `url(${headTexture}) blue repeat 40% 100%`,
@@ -44,43 +44,40 @@ const AboutSection = () => {
               color: "transparent"
             }}
           >
-            Kaleidoscope <br/> From The Lens of Infinite Possibilities
+            Gravity & Glitch <br /> Errors That Change the Equations
           </h2>
-          
+
           {/* Theme information box - fixed with proper sizing and layout */}
           <div className="bg-[#1a1a1a] p-8 rounded-lg w-full max-w-5xl animate-on-scroll">
             <div className="flex flex-col md:flex-row">
               {/* Left side - headings */}
               <div className="md:w-1/4 mb-4 md:mb-0 pr-4">
                 <h3 className="text-sm font-semibold text-tedx-white">THIS YEAR'S THEME</h3>
-                <h4 className="text-4xl md:text-5xl font-bold text-tedx-red mt-1">Kaleidoscope</h4>
+                <h4 className="text-4xl md:text-5xl font-bold text-tedx-red mt-1">Gravity & Glitch</h4>
               </div>
-              
+
               {/* Right side - text with proper spacing */}
               <div className="md:w-3/4 md:pl-8 lg:pl-16">
-                <p className="text-gray-300 text-base">
-                  This year's theme invites us to Kaleidoscope where every shift in perspective reveals a vibrant mosaic of ideas.
+                <p className="text-gray-300 text-base mb-4">
+                  Step into a space where stability meets disruption, and familiar equations are courageously reexamined. "Gravity and Glitch" explores the tension between the forces that ground us and the errors that transform us.
                 </p>
-                <p>
-                Witness a fusion of art and innovation as new insights break the mold of conventional thought. 
-                Each moment becomes a fragment in a larger, mesmerizing pattern that redefines our boundaries. 
-                Embrace the dynamic interplay of creativity and transformation that sparks endless potential. 
-                Join us on this journey to explore how diverse minds converge to illuminate a future of infinite possibilities.
+                <p className="text-gray-300 text-base">
+                  It reflects on how established systems provide direction, yet true progress often begins with a deviation from the expected. Each disruption becomes an opportunity to rethink, reshape, and reimagine what once seemed fixed. Embrace the power of imbalance as a catalyst for innovation, resilience, and a future redefined by possibility.
                 </p>
               </div>
             </div>
           </div>
-          
+
           {/* CTA Buttons */}
           <div className="mt-12 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-on-scroll">
-            <Link 
-              to="/events" 
+            <Link
+              to="/events"
               className="bg-tedx-red hover:bg-red-700 text-tedx-white font-bold py-3 px-8 rounded-lg transition duration-300 text-center"
             >
               Explore Theme
             </Link>
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="border-2 border-tedx-white hover:border-tedx-red hover:text-tedx-red text-tedx-white font-bold py-3 px-8 rounded-lg transition duration-300 text-center"
             >
               Learn More
