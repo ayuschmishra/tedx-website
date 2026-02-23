@@ -83,14 +83,6 @@ const About = () => {
       image: "/img/team/rekha.png",
       category: "relations"
     },
-    {
-      id: 10,
-      name: "Vishakha",
-      role: "Public Relation Co-Head",
-      bio: "BA Program, 2nd Year",
-      image: "/img/team/vishakha.png",
-      category: "relations"
-    },
     
     // Curation
     {
@@ -171,14 +163,6 @@ const About = () => {
     },
     {
       id: 20,
-      name: "Kabir",
-      role: "Event Manager",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/kabir.png",
-      category: "events"
-    },
-    {
-      id: 21,
       name: "Sauma Kumari",
       role: "Event Manager",
       bio: "BA Hons English, 3rd Year",
