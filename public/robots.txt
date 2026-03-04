@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tedxshivajicollege.vercel.app/sitemap.xml
