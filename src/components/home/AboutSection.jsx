@@ -35,13 +35,14 @@ const AboutSection = () => {
         <div className="flex flex-col items-center">
           {/* Theme heading with background clip text */}
           <h2
-            className="text-5xl md:text-6xl lg:text-8xl font-bold mb-16 text-center animate-on-scroll"
+            className="text-5xl md:text-6xl lg:text-8xl font-bold mb-16 text-center animate-on-scroll pb-4"
             style={{
               background: `url(${headTexture}) blue repeat 40% 100%`,
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              color: "transparent"
+              color: "transparent",
+              lineHeight: "1.2"
             }}
           >
             Gravity & Glitch <br /> Errors That Change the Equations
