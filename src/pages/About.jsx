@@ -12,7 +12,7 @@ const About = () => {
       name: "Khushi Chauhan",
       role: "Licensee",
       bio: "BA Program, 3rd Year",
-      image: "/img/team/khushi-c.png",
+      image: "/img/team/khushi-c.webp",
       category: "leadership"
     },
     {
@@ -20,7 +20,7 @@ const About = () => {
       name: "Ayush Joshia",
       role: "Co-Licensee",
       bio: "B.Sc Physics Hons, 3rd Year",
-      image: "/img/team/ayush-j.png",
+      image: "/img/team/ayush-j.webp",
       category: "leadership"
     },
     {
@@ -28,7 +28,7 @@ const About = () => {
       name: "Pratham Nagpal",
       role: "CO-Organizer",
       bio: "BA Program, 4th Year",
-      image: "/img/team/pratham-n.png",
+      image: "/img/team/pratham.webp",
       category: "leadership"
     },
     {
@@ -36,7 +36,7 @@ const About = () => {
       name: "Ayush Mishra",
       role: "Executive Producer",
       bio: "B.Sc Physics Hons, 3rd Year",
-      image: "/img/team/ayush.png",
+      image: "/img/team/ayusch.webp",
       category: "leadership"
     },
     {
@@ -44,7 +44,7 @@ const About = () => {
       name: "Mayank Ray",
       role: "Event Producer",
       bio: "BA Program, 3rd Year",
-      image: "/img/team/mayank.png",
+      image: "/img/team/mayank.webp",
       category: "leadership"
     },
 
@@ -54,7 +54,7 @@ const About = () => {
       name: "Ashish Giri",
       role: "Tech Team",
       bio: "B.A. English Hons",
-      image: "/img/team/ashish.png",
+      image: "/img/team/ashish.webp",
       category: "tech"
     },
     {
@@ -62,7 +62,7 @@ const About = () => {
       name: "Swaraj Priyadarshi",
       role: "Tech Team",
       bio: "Tech Specialist",
-      image: "/img/team/swaraj.png",
+      image: "/img/team/swaraj.webp",
       category: "tech"
     },
 
@@ -72,8 +72,8 @@ const About = () => {
       name: "Somya",
       role: "Design Team",
       bio: "B.A. Economics Hons",
-      image: "/img/team/somya.png",
-      category: "creative"
+      image: "/img/team/somya.webp",
+      category: "design"
     },
 
     // Logistics & Operations
@@ -82,16 +82,16 @@ const About = () => {
       name: "Anshika",
       role: "Logistics & Operations",
       bio: "English Hons, 2nd Year",
-      image: "/img/team/anshika.png",
-      category: "tech"
+      image: "/img/team/anshika.webp",
+      category: "logistics"
     },
     {
       id: 10,
       name: "Reyansh",
       role: "Logistics & Operations",
       bio: "B.A. Prog, 2nd Year",
-      image: "/img/team/reyansh.png",
-      category: "tech"
+      image: "/img/team/reyansh.webp",
+      category: "logistics"
     },
 
     // Finance
@@ -100,8 +100,8 @@ const About = () => {
       name: "Mahniya Gautam",
       role: "Finance Team",
       bio: "B.A. Economics Hons, 3rd Year",
-      image: "/img/team/mahniya.png",
-      category: "tech"
+      image: "/img/team/mahniya.webp",
+      category: "finance"
     },
 
     // Curation
@@ -110,7 +110,7 @@ const About = () => {
       name: "Alya Mehta",
       role: "Curation Team",
       bio: "B.A. Economics Hons, 1st Year",
-      image: "/img/team/alya.png",
+      image: "/img/team/alya.webp",
       category: "curation"
     },
 
@@ -120,7 +120,7 @@ const About = () => {
       name: "Shreya Bansal",
       role: "Public Relations",
       bio: "B.Com Hons, 2nd Year",
-      image: "/img/team/shreya.png",
+      image: "/img/team/shreya.webp",
       category: "relations"
     },
 
@@ -130,8 +130,8 @@ const About = () => {
       name: "Hiteshi",
       role: "Social Media",
       bio: "BA Prog, 3rd Year",
-      image: "/img/team/hiteshi.png",
-      category: "relations"
+      image: "/img/team/hiteshi.webp",
+      category: "social media"
     }
   ];
 
