@@ -4,8 +4,18 @@ import React, { useState } from 'react';
 const About = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Team members data from the PDF
+  // Team members data
   const teamMembers = [
+    // Advisory
+    {
+      id: 15,
+      name: "Ms. Abha Vasal",
+      role: "Advisory Board Member",
+      bio: "TEDx Coordinator",
+      image: "/img/team/john.png",
+      category: "advisory"
+    },
+
     // Leadership
     {
       id: 1,
@@ -48,90 +58,84 @@ const About = () => {
       category: "leadership"
     },
 
-    // Tech
+    // Council
     {
       id: 6,
       name: "Ashish Giri",
-      role: "Tech Team",
+      role: "Tech Head",
       bio: "B.A. English Hons",
       image: "/img/team/ashish.webp",
-      category: "tech"
+      category: "council"
     },
     {
       id: 7,
       name: "Swaraj Priyadarshi",
-      role: "Tech Team",
+      role: "Tech Head",
       bio: "Tech Specialist",
       image: "/img/team/swaraj.webp",
-      category: "tech"
+      category: "council"
     },
 
-    // Design
     {
       id: 8,
       name: "Somya",
-      role: "Design Team",
+      role: "Design Head",
       bio: "B.A. Economics Hons",
       image: "/img/team/somya.webp",
-      category: "design"
+      category: "council"
     },
 
-    // Logistics & Operations
     {
       id: 9,
       name: "Anshika",
-      role: "Logistics & Operations",
+      role: "Logistics Head",
       bio: "English Hons, 2nd Year",
       image: "/img/team/anshika.webp",
-      category: "logistics"
+      category: "council"
     },
     {
       id: 10,
       name: "Reyansh",
-      role: "Logistics & Operations",
+      role: "Operations Head",
       bio: "B.A. Prog, 2nd Year",
       image: "/img/team/reyansh.webp",
-      category: "logistics"
+      category: "council"
     },
 
-    // Finance
     {
       id: 11,
       name: "Mahniya Gautam",
-      role: "Finance Team",
+      role: "Finance Head",
       bio: "B.A. Economics Hons, 3rd Year",
       image: "/img/team/mahniya.webp",
-      category: "finance"
+      category: "council"
     },
 
-    // Curation
     {
       id: 12,
       name: "Alya Mehta",
-      role: "Curation Team",
+      role: "Curation Head",
       bio: "B.A. Economics Hons, 1st Year",
       image: "/img/team/alya.webp",
-      category: "curation"
+      category: "council"
     },
 
-    // Public Relations
     {
       id: 13,
       name: "Shreya Bansal",
-      role: "Public Relations",
+      role: "PR Head",
       bio: "B.Com Hons, 2nd Year",
       image: "/img/team/shreya.webp",
-      category: "relations"
+      category: "council"
     },
 
-    // Social Media
     {
       id: 14,
       name: "Hiteshi",
-      role: "Social Media",
+      role: "Social Media Head",
       bio: "BA Prog, 3rd Year",
       image: "/img/team/hiteshi.webp",
-      category: "social media"
+      category: "council"
     }
   ];
 
@@ -143,13 +147,9 @@ const About = () => {
   // Categories for filter
   const categories = [
     { id: 'all', name: 'All Team' },
+    { id: 'advisory', name: 'Advisory' },
     { id: 'leadership', name: 'Leadership' },
-    { id: 'creative', name: 'Creative Team' },
-    { id: 'relations', name: 'Public Relations' },
-    { id: 'curation', name: 'Curation' },
-    { id: 'tech', name: 'Tech & Logistics' },
-    { id: 'events', name: 'Event Management' },
-    { id: 'advisory', name: 'Advisory' }
+    { id: 'council', name: 'Council' }
   ];
 
   return (
