@@ -9,180 +9,135 @@ const About = () => {
     // Leadership
     {
       id: 1,
-      name: "Mohit Singh Rathore",
-      role: "Lead Organizer",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/mohit.png",
+      name: "Khushi Chauhan",
+      role: "Licensee",
+      bio: "BA Program, 3rd Year",
+      image: "/img/team/khushi-c.png",
       category: "leadership"
     },
     {
       id: 2,
-      name: "Joel Chamathil Mohan",
-      role: "Lead Co-Organizer",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/joel.png",
+      name: "Ayush Joshia",
+      role: "Co-Licensee",
+      bio: "B.Sc Physics Hons, 3rd Year",
+      image: "/img/team/ayush-j.png",
       category: "leadership"
     },
     {
       id: 3,
-      name: "Harsh",
-      role: "Co-Organizer",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/harsh.png",
+      name: "Pratham Nagpal",
+      role: "CO-Organizer",
+      bio: "BA Program, 4th Year",
+      image: "/img/team/pratham-n.png",
       category: "leadership"
     },
     {
       id: 4,
-      name: "Priyaranjan",
-      role: "Co-Organizer",
-      bio: "B.Sc (Hons) Zoology, 3rd Year",
-      image: "/img/team/priyaranjan.png",
+      name: "Ayush Mishra",
+      role: "Executive Producer",
+      bio: "B.Sc Physics Hons, 3rd Year",
+      image: "/img/team/ayush.png",
       category: "leadership"
     },
-    
-    // Creative Team
     {
       id: 5,
-      name: "Simarjeet Singh",
-      role: "Head Designer",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/simarjeet.png",
-      category: "creative"
+      name: "Mayank Ray",
+      role: "Event Producer",
+      bio: "BA Program, 3rd Year",
+      image: "/img/team/mayank.png",
+      category: "leadership"
     },
+
+    // Tech
     {
       id: 6,
-      name: "Ishaan Rana",
-      role: "Creative Head",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/ishaan.png",
-      category: "creative"
+      name: "Ashish Giri",
+      role: "Tech Team",
+      bio: "B.A. English Hons",
+      image: "/img/team/ashish.png",
+      category: "tech"
     },
     {
       id: 7,
-      name: "Khushi Yadav",
-      role: "Creative Co-Head",
-      bio: "BA Program, 2nd Year",
-      image: "/img/team/khushi-y.png",
-      category: "creative"
+      name: "Swaraj Priyadarshi",
+      role: "Tech Team",
+      bio: "Tech Specialist",
+      image: "/img/team/swaraj.png",
+      category: "tech"
     },
+
+    // Design
     {
       id: 8,
-      name: "Jasmeet Singh",
-      role: "Video Production Head",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/jasmeet.png",
+      name: "Somya",
+      role: "Design Team",
+      bio: "B.A. Economics Hons",
+      image: "/img/team/somya.png",
       category: "creative"
     },
-    
-    // Public Relations
+
+    // Logistics & Operations
     {
       id: 9,
-      name: "Rekha Saini",
-      role: "Public Relation Head",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/rekha.png",
-      category: "relations"
+      name: "Anshika",
+      role: "Logistics & Operations",
+      bio: "English Hons, 2nd Year",
+      image: "/img/team/anshika.png",
+      category: "tech"
     },
-    
-    // Curation
+    {
+      id: 10,
+      name: "Reyansh",
+      role: "Logistics & Operations",
+      bio: "B.A. Prog, 2nd Year",
+      image: "/img/team/reyansh.png",
+      category: "tech"
+    },
+
+    // Finance
     {
       id: 11,
-      name: "Ashwarya Thakur",
-      role: "Curator Head",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/ashwarya.png",
-      category: "curation"
+      name: "Mahniya Gautam",
+      role: "Finance Team",
+      bio: "B.A. Economics Hons, 3rd Year",
+      image: "/img/team/mahniya.png",
+      category: "tech"
     },
+
+    // Curation
     {
       id: 12,
-      name: "Khushi Chauhan",
-      role: "Curator Head",
-      bio: "BA Program, 2nd Year",
-      image: "/img/team/khushi-c.png",
+      name: "Alya Mehta",
+      role: "Curation Team",
+      bio: "B.A. Economics Hons, 1st Year",
+      image: "/img/team/alya.png",
       category: "curation"
     },
-    
-    // Tech & Logistics
+
+    // Public Relations
     {
       id: 13,
-      name: "Ayush Mishra",
-      role: "Website Manager",
-      bio: "B.Sc (Hons) Physics, 2nd Year",
-      image: "/img/team/ayush.png",
-      category: "tech"
+      name: "Shreya Bansal",
+      role: "Public Relations",
+      bio: "B.Com Hons, 2nd Year",
+      image: "/img/team/shreya.png",
+      category: "relations"
     },
+
+    // Social Media
     {
       id: 14,
-      name: "Harshit Shree",
-      role: "Website Manager",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/harshit.png",
-      category: "tech"
-    },
-    {
-      id: 15,
-      name: "Piyush Rai",
-      role: "Logistics Head",
-      bio: "BA Hons Economics, 3rd Year",
-      image: "/img/team/piyush.png",
-      category: "tech"
-    },
-    {
-      id: 16,
-      name: "Pulkit Garg",
-      role: "Finance Head",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/pulkit.png",
-      category: "tech"
-    },
-    
-    // Event Team
-    {
-      id: 17,
-      name: "Aman Singh",
-      role: "Event Producer",
-      bio: "BA Program, 3rd Year",
-      image: "/img/team/aman.png",
-      category: "events"
-    },
-    {
-      id: 18,
-      name: "Lakshay Nahar",
-      role: "Event Producer",
-      bio: "B.Com Hons, 3rd Year",
-      image: "/img/team/lakshay.png",
-      category: "events"
-    },
-    {
-      id: 19,
-      name: "Pratham Singh",
-      role: "Event Producer",
-      bio: "BA Program, 3rd Year",
-      image: "/img/team/pratham.png",
-      category: "events"
-    },
-    {
-      id: 20,
-      name: "Sauma Kumari",
-      role: "Event Manager",
-      bio: "BA Hons English, 3rd Year",
-      image: "/img/team/saumya.png",
-      category: "events"
-    },
-    // Additional profile
-    {
-      id: 22,
-      name: "Ms. Abha Vasal",
-      role: "Advisory Board Member",
-      bio: "TEDx Coordinator",
-      image: "/img/team/john.png",
-      category: "advisory"
+      name: "Hiteshi",
+      role: "Social Media",
+      bio: "BA Prog, 3rd Year",
+      image: "/img/team/hiteshi.png",
+      category: "relations"
     }
   ];
 
   // Filter team members based on active category
-  const filteredMembers = activeCategory === 'all' 
-    ? teamMembers 
+  const filteredMembers = activeCategory === 'all'
+    ? teamMembers
     : teamMembers.filter(member => member.category === activeCategory);
 
   // Categories for filter
@@ -212,7 +167,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* What is TEDx */}
       <section className="py-24 bg-tedx-white">
         <div className="container mx-auto px-6 lg:px-8">
@@ -248,11 +203,10 @@ const About = () => {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category.id 
-                    ? 'bg-tedx-red text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category.id
+                  ? 'bg-tedx-red text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
               >
                 {category.name}
               </button>
@@ -264,7 +218,7 @@ const About = () => {
             {filteredMembers.map((member) => (
               <div key={member.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-xl">
                 <div className="h-64 overflow-hidden">
-                  <div 
+                  <div
                     className="w-full h-full bg-gray-200 flex items-center justify-center text-tedx-red font-bold text-xl"
                     style={{
                       backgroundImage: `url(${member.image})`,
@@ -297,8 +251,8 @@ const About = () => {
             <p className="text-xl mb-8">
               Passionate about spreading ideas? We're always looking for volunteers to join our TEDx team.
             </p>
-            <a 
-              href="/get-involved" 
+            <a
+              href="/get-involved"
               className="inline-block bg-tedx-white text-tedx-red font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-black/20 hover:-translate-y-1"
             >
               Get Involved
