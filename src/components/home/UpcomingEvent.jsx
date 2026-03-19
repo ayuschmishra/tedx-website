@@ -1,14 +1,45 @@
 // src/components/home/UpcomingEvent.jsx
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 // Import event banner image directly
 import eventBanner from '../../assets/event-banner.png';
 
 const UpcomingEvent = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const targetDate = new Date('April 2, 2025 10:00:00').getTime();
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   // This would typically come from an API or CMS
   const nextEvent = {
-    title: "TEDxShivajiCollege 2025: Gravity & Glitch",
-    date: "To be revealed",
+    title: "TEDxShivajiCollege 2026: Gravity & Glitch",
+    date: "April 2, 2025",
     time: "10:00 AM - 5:00 PM",
     location: "ShivajiCollege Auditorium",
     image: eventBanner, // Use the imported image
@@ -70,9 +101,30 @@ const UpcomingEvent = () => {
 
             {/* Countdown */}
             <div className="bg-[#1a1a1a] border border-gray-800 p-4 rounded-lg mb-6">
-              <div className="flex items-center justify-center">
-                <div className="text-3xl font-bold text-tedx-white tracking-widest uppercase">Coming soon</div>
-              </div>
+              {timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0 ? (
+                <div className="grid grid-cols-4 gap-4 text-center">
+                  <div className="flex flex-col">
+                    <span className="text-3xl font-bold text-tedx-white">{timeLeft.days}</span>
+                    <span className="text-sm text-gray-400 uppercase tracking-wider text-xs">Days</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-3xl font-bold text-tedx-white">{timeLeft.hours}</span>
+                    <span className="text-sm text-gray-400 uppercase tracking-wider text-xs">Hours</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-3xl font-bold text-tedx-white">{timeLeft.minutes}</span>
+                    <span className="text-sm text-gray-400 uppercase tracking-wider text-xs">Mins</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-3xl font-bold text-tedx-white">{timeLeft.seconds}</span>
+                    <span className="text-sm text-gray-400 uppercase tracking-wider text-xs">Secs</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  <div className="text-3xl font-bold text-tedx-white tracking-widest uppercase">Coming soon</div>
+                </div>
+              )}
             </div>
 
             <div className="flex space-x-4">

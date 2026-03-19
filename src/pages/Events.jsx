@@ -14,8 +14,8 @@ const Events = () => {
 
   // Upcoming event data with imported image
   const upcomingEvent = {
-    title: "TEDxShivajiCollege 2025: Gravity & Glitch",
-    date: "To be revealed",
+    title: "TEDxShivajiCollege 2026: Gravity & Glitch",
+    date: "April 2, 2025",
     time: "10:00 AM - 5:00 PM",
     location: "ShivajiCollege Auditorium",
     description: "Join us for a day of groundbreaking ideas and inspirational talks",
