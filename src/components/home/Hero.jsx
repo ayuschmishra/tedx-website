@@ -23,8 +23,8 @@ const Hero = () => {
         playsInline
       >
         <source
-          src="https://cdn.prod.website-files.com/62165efbce6bcc862200724a/67082a0cef3a219a8958dab2_HomeBanner-transcode.mp4"
-          type="video/mp4"
+          src="/videos/hero_vdeo.webm"
+          type="video/webm"
         />
         {/* Fallback text if video fails to load */}
         Your browser does not support the video tag.
