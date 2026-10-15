@@ -44,61 +44,34 @@ const ProcessSteps = () => {
 
     const buildWave = () => {
       const box = container.getBoundingClientRect();
-      const points = cardRefs.current.filter(Boolean).map(card => {
-        // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
-        return {
-          x: card.offsetLeft + card.offsetWidth / 2,
-          y: card.offsetTop + card.offsetHeight / 2,
-        };
-      });
+      // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
+      const points = cardRefs.current.filter(Boolean).map(card => ({
+        x: card.offsetLeft + card.offsetWidth / 2,
+        y: card.offsetTop + card.offsetHeight / 2,
+      }));
       if (points.length < 2) return;
 
-      // Overall S-curve from card to card, with a sine ripple on top so the
-      // line visibly waves in the gaps between cards.
-      const swing = Math.min(box.width * 0.35, 220);
-      const ripple = box.width < 768 ? 14 : 22;
-      const wavelength = box.width < 768 ? 90 : 140;
-      const clampX = x => Math.min(Math.max(x, ripple), box.width - ripple);
-      const cubic = (p0, p1, p2, p3, t) => {
-        const u = 1 - t;
-        return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3;
-      };
+      // Big S-curves from card centre to card centre, with a short lead-in
+      // above the first card and a tail below the last one.
+      const amplitude = Math.min(box.width * 0.35, 220);
+      const clampX = x => Math.min(Math.max(x, 0), box.width);
+      const first = points[0];
+      const last = points[points.length - 1];
+      const all = [
+        { x: first.x, y: Math.max(first.y - 60, 0) },
+        ...points,
+        { x: last.x, y: Math.min(last.y + 60, box.height) },
+      ];
 
-      const samples = [];
-      for (let i = 0; i < points.length - 1; i++) {
-        const a = points[i];
-        const b = points[i + 1];
+      let d = `M${all[0].x},${all[0].y}`;
+      for (let i = 0; i < all.length - 1; i++) {
+        const a = all[i];
+        const b = all[i + 1];
         const dy = b.y - a.y;
         const side = i % 2 === 0 ? 1 : -1;
-        const c1 = { x: clampX(a.x + swing * side), y: a.y + dy * 0.5 };
-        const c2 = { x: clampX(b.x - swing * side), y: b.y - dy * 0.5 };
-        for (let s = i === 0 ? 0 : 1; s <= 60; s++) {
-          const t = s / 60;
-          samples.push({
-            x: cubic(a.x, c1.x, c2.x, b.x, t),
-            y: cubic(a.y, c1.y, c2.y, b.y, t),
-          });
-        }
+        d += ` C${clampX(a.x + amplitude * side)},${a.y + dy * 0.5}`;
+        d += ` ${clampX(b.x - amplitude * side)},${b.y - dy * 0.5} ${b.x},${b.y}`;
       }
-
-      let travelled = 0;
-      const wavy = samples.map((pt, i) => {
-        const prev = samples[Math.max(i - 1, 0)];
-        const next = samples[Math.min(i + 1, samples.length - 1)];
-        if (i > 0) travelled += Math.hypot(pt.x - prev.x, pt.y - prev.y);
-        const tx = next.x - prev.x;
-        const ty = next.y - prev.y;
-        const len = Math.hypot(tx, ty) || 1;
-        const offset = ripple * Math.sin((travelled / wavelength) * Math.PI * 2);
-        return {
-          x: clampX(pt.x + (-ty / len) * offset),
-          y: pt.y + (tx / len) * offset,
-        };
-      });
-
-      const d = wavy
-        .map((pt, i) => `${i === 0 ? 'M' : 'L'}${pt.x.toFixed(1)},${pt.y.toFixed(1)}`)
-        .join(' ');
       setWave({ d, width: box.width, height: box.height });
     };
 
@@ -250,7 +223,7 @@ const ProcessSteps = () => {
                 >
                   <div 
                     className={`
-                      relative overflow-hidden rounded-lg shadow-2xl bg-[#161616]
+                      relative overflow-hidden rounded-lg shadow-2xl
                       transform transition-all duration-500
                       ${animatedItem === index ? 'scale-105 shadow-tedx-red/30' : 'scale-100'}
                     `}
