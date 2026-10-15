@@ -1,11 +1,13 @@
 // src/components/get-involved/ProcessSteps.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { processStepImages, getFallbackImage } from '../../utils/PlaceholderImagesConfig';
 
 const ProcessSteps = () => {
   const [animatedItem, setAnimatedItem] = useState(0);
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
+  const containerRef = useRef(null);
+  const [wave, setWave] = useState({ d: '', width: 0, height: 0 });
 
   // Process steps data - matching second image reference
   const processSteps = [
@@ -34,6 +36,79 @@ const ProcessSteps = () => {
     cardRefs.current = cardRefs.current.slice(0, processSteps.length);
   }, [processSteps.length]);
 
+  // Build a wavy path that snakes from card to card, using the cards' real
+  // positions so it lines up on every screen size (mobile and desktop).
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const buildWave = () => {
+      const box = container.getBoundingClientRect();
+      const points = cardRefs.current.filter(Boolean).map(card => {
+        // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
+        return {
+          x: card.offsetLeft + card.offsetWidth / 2,
+          y: card.offsetTop + card.offsetHeight / 2,
+        };
+      });
+      if (points.length < 2) return;
+
+      // Overall S-curve from card to card, with a sine ripple on top so the
+      // line visibly waves in the gaps between cards.
+      const swing = Math.min(box.width * 0.35, 220);
+      const ripple = box.width < 768 ? 14 : 22;
+      const wavelength = box.width < 768 ? 90 : 140;
+      const clampX = x => Math.min(Math.max(x, ripple), box.width - ripple);
+      const cubic = (p0, p1, p2, p3, t) => {
+        const u = 1 - t;
+        return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3;
+      };
+
+      const samples = [];
+      for (let i = 0; i < points.length - 1; i++) {
+        const a = points[i];
+        const b = points[i + 1];
+        const dy = b.y - a.y;
+        const side = i % 2 === 0 ? 1 : -1;
+        const c1 = { x: clampX(a.x + swing * side), y: a.y + dy * 0.5 };
+        const c2 = { x: clampX(b.x - swing * side), y: b.y - dy * 0.5 };
+        for (let s = i === 0 ? 0 : 1; s <= 60; s++) {
+          const t = s / 60;
+          samples.push({
+            x: cubic(a.x, c1.x, c2.x, b.x, t),
+            y: cubic(a.y, c1.y, c2.y, b.y, t),
+          });
+        }
+      }
+
+      let travelled = 0;
+      const wavy = samples.map((pt, i) => {
+        const prev = samples[Math.max(i - 1, 0)];
+        const next = samples[Math.min(i + 1, samples.length - 1)];
+        if (i > 0) travelled += Math.hypot(pt.x - prev.x, pt.y - prev.y);
+        const tx = next.x - prev.x;
+        const ty = next.y - prev.y;
+        const len = Math.hypot(tx, ty) || 1;
+        const offset = ripple * Math.sin((travelled / wavelength) * Math.PI * 2);
+        return {
+          x: clampX(pt.x + (-ty / len) * offset),
+          y: pt.y + (tx / len) * offset,
+        };
+      });
+
+      const d = wavy
+        .map((pt, i) => `${i === 0 ? 'M' : 'L'}${pt.x.toFixed(1)},${pt.y.toFixed(1)}`)
+        .join(' ');
+      setWave({ d, width: box.width, height: box.height });
+    };
+
+    buildWave();
+    const resizeObserver = new ResizeObserver(buildWave);
+    resizeObserver.observe(container);
+    cardRefs.current.forEach(card => card && resizeObserver.observe(card));
+    return () => resizeObserver.disconnect();
+  }, []);
+
   // Handle scroll-based animations
   useEffect(() => {
     const options = {
@@ -42,7 +117,7 @@ const ProcessSteps = () => {
       threshold: 0.3, // When element is 30% visible
     };
 
-    const handleIntersect = (entries, observer) => {
+    const handleIntersect = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           // Get the index from the data attribute
@@ -84,12 +159,12 @@ const ProcessSteps = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Our Process</h2>
           <div className="h-1 w-24 bg-tedx-red mx-auto mt-3"></div>
           <p className="mt-6 text-lg text-gray-300 max-w-3xl mx-auto">
-            Here's what you can expect when you decide to get involved with TEDxShivajiCollege
+            Here&apos;s what you can expect when you decide to get involved with TEDxShivajiCollege
           </p>
         </div>
       
       {/* CSS for animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
@@ -100,71 +175,58 @@ const ProcessSteps = () => {
         }
         
         .path-animation {
-          stroke-dashoffset: 100;
-          animation: dash 15s linear forwards infinite;
+          animation: dash 1.5s linear infinite;
         }
         
         @keyframes dash {
           to {
-            stroke-dashoffset: -100;
+            stroke-dashoffset: -16;
           }
         }
         
-        @keyframes pulse {
-          0% { r: 8; opacity: 0.7; }
-          50% { r: 12; opacity: 1; }
-          100% { r: 8; opacity: 0.7; }
+        .wave-dot {
+          filter: drop-shadow(0 0 6px #e62b1e);
         }
         
-        .pulse-circle {
-          animation: pulse 2s infinite;
+        @media (prefers-reduced-motion: reduce) {
+          .path-animation { animation: none; }
+          .wave-dot { display: none; }
         }
       `}</style>
         
-        <div className="max-w-6xl mx-auto relative">
-          {/* Connecting line with animated dots - visible on desktop */}
-          <div className="hidden md:block absolute z-0 h-full w-full">
-            {/* Curved connecting line */}
-            <svg className="absolute top-1/2 left-0 right-0 -translate-y-1/2" width="100%" height="200" viewBox="0 0 1200 100">
-              <path 
-                d="M100,50 C400,0 800,100 1100,50" 
-                fill="none" 
-                stroke="#e62b1e" 
-                strokeWidth="3" 
+        <div className="max-w-6xl mx-auto relative" ref={containerRef}>
+          {/* Wavy connecting line - drawn behind the cards, follows their real positions */}
+          {wave.d && (
+            <svg
+              className="absolute inset-0 z-0 pointer-events-none"
+              width={wave.width}
+              height={wave.height}
+              viewBox={`0 0 ${wave.width} ${wave.height}`}
+              aria-hidden="true"
+            >
+              <path d={wave.d} fill="none" stroke="#e62b1e" strokeOpacity="0.25" strokeWidth="2" />
+              <path
+                id="process-wave-path"
+                d={wave.d}
+                fill="none"
+                stroke="#e62b1e"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeDasharray="8,8"
                 className="path-animation"
               />
-              
-              {/* Circles at key points */}
-              <circle cx="100" cy="50" r="10" fill="#e62b1e" className={animatedItem === 0 ? 'pulse-circle' : ''} />
-              <circle cx="600" cy="75" r="10" fill="#e62b1e" className={animatedItem === 1 ? 'pulse-circle' : ''} />
-              <circle cx="1100" cy="50" r="10" fill="#e62b1e" className={animatedItem === 2 ? 'pulse-circle' : ''} />
+              <circle r="6" fill="#e62b1e" className="wave-dot">
+                <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#process-wave-path" />
+                </animateMotion>
+              </circle>
             </svg>
-          </div>
-          
-          {/* Mobile connecting vertical line */}
-          <div className="md:hidden absolute left-4 top-0 bottom-0 w-px bg-tedx-red z-10">
-            {/* Dots on the timeline */}
-            {processSteps.map((step, index) => (
-              <div 
-                key={index}
-                className={`absolute left-0 transform -translate-x-1/2 w-6 h-6 rounded-full border-2 border-black
-                  ${animatedItem === index ? 'bg-tedx-red scale-110' : 'bg-gray-800'}
-                  transition-all duration-500`}
-                style={{ top: `${index * 33.33 + 5}%` }}
-              >
-                <span className="text-white text-xs font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  {step.number}
-                </span>
-              </div>
-            ))}
-          </div>
-          
+          )}
+
           {/* Process steps as alternating cards (similar to your second image) */}
           <div className="relative z-10">
             {processSteps.map((step, index) => {
-              // For desktop: Alternate left and right alignment
-              const isEven = index % 2 === 0;
               
               return (
                 <div 
@@ -172,7 +234,7 @@ const ProcessSteps = () => {
                   ref={el => cardRefs.current[index] = el}
                   data-index={index}
                   className={`
-                    mb-16 last:mb-0 md:mb-8
+                    mb-20 last:mb-0 md:mb-12
                     opacity-0 translate-y-8
                     transition-all duration-700
                     ${index === 0 ? 'md:ml-0' : ''}
@@ -188,7 +250,7 @@ const ProcessSteps = () => {
                 >
                   <div 
                     className={`
-                      relative overflow-hidden rounded-lg shadow-2xl
+                      relative overflow-hidden rounded-lg shadow-2xl bg-[#161616]
                       transform transition-all duration-500
                       ${animatedItem === index ? 'scale-105 shadow-tedx-red/30' : 'scale-100'}
                     `}
