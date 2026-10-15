@@ -36,69 +36,58 @@ const ProcessSteps = () => {
     cardRefs.current = cardRefs.current.slice(0, processSteps.length);
   }, [processSteps.length]);
 
-  // Build a wavy path that snakes from card to card, using the cards' real
-  // positions so it lines up on every screen size (mobile and desktop).
+  // Build a flowing path from card to card, using the cards' real positions
+  // so it lines up on every screen size (mobile and desktop).
   useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const buildWave = () => {
       const box = container.getBoundingClientRect();
-      const points = cardRefs.current.filter(Boolean).map(card => {
-        // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
-        return {
-          x: card.offsetLeft + card.offsetWidth / 2,
-          y: card.offsetTop + card.offsetHeight / 2,
-        };
-      });
-      if (points.length < 2) return;
+      // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
+      const cards = cardRefs.current.filter(Boolean).map(card => ({
+        left: card.offsetLeft,
+        right: card.offsetLeft + card.offsetWidth,
+        top: card.offsetTop,
+        bottom: card.offsetTop + card.offsetHeight,
+        cx: card.offsetLeft + card.offsetWidth / 2,
+        cy: card.offsetTop + card.offsetHeight / 2,
+      }));
+      if (cards.length < 2) return;
 
-      // Overall S-curve from card to card, with a sine ripple on top so the
-      // line visibly waves in the gaps between cards.
-      const swing = Math.min(box.width * 0.35, 220);
-      const ripple = box.width < 768 ? 14 : 22;
-      const wavelength = box.width < 768 ? 90 : 140;
-      const clampX = x => Math.min(Math.max(x, ripple), box.width - ripple);
-      const cubic = (p0, p1, p2, p3, t) => {
-        const u = 1 - t;
-        return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3;
-      };
+      // Smooth river-like curves: each one slips out from under a card and
+      // flows into the next. The ends are tucked under the cards (inset).
+      const isDesktop = box.width >= 768;
+      const inset = 24;
+      let d = '';
+      for (let i = 0; i < cards.length - 1; i++) {
+        const from = cards[i];
+        const to = cards[i + 1];
+        let start, end, c1, c2;
 
-      const samples = [];
-      for (let i = 0; i < points.length - 1; i++) {
-        const a = points[i];
-        const b = points[i + 1];
-        const dy = b.y - a.y;
-        const side = i % 2 === 0 ? 1 : -1;
-        const c1 = { x: clampX(a.x + swing * side), y: a.y + dy * 0.5 };
-        const c2 = { x: clampX(b.x - swing * side), y: b.y - dy * 0.5 };
-        for (let s = i === 0 ? 0 : 1; s <= 60; s++) {
-          const t = s / 60;
-          samples.push({
-            x: cubic(a.x, c1.x, c2.x, b.x, t),
-            y: cubic(a.y, c1.y, c2.y, b.y, t),
-          });
+        if (isDesktop) {
+          // Leave from the side facing the next card, sweep across, then
+          // curve down into the top of the next card.
+          const goingRight = to.cx > from.cx;
+          start = { x: goingRight ? from.right - inset : from.left + inset, y: from.cy };
+          end = { x: to.cx, y: to.top + inset };
+          c1 = { x: start.x + (end.x - start.x) * 0.75, y: start.y };
+          c2 = { x: end.x, y: start.y + (end.y - start.y) * 0.35 };
+        } else {
+          // Stacked cards: a gentle S-bend through the gap.
+          const sway = box.width * 0.22;
+          const side = i % 2 === 0 ? 1 : -1;
+          start = { x: from.cx, y: from.bottom - inset };
+          end = { x: to.cx, y: to.top + inset };
+          const dy = end.y - start.y;
+          c1 = { x: start.x + sway * side, y: start.y + dy * 0.5 };
+          c2 = { x: end.x - sway * side, y: end.y - dy * 0.5 };
         }
+
+        // Join segments underneath the card so the path stays continuous.
+        d += i === 0 ? `M${start.x},${start.y}` : ` L${start.x},${start.y}`;
+        d += ` C${c1.x},${c1.y} ${c2.x},${c2.y} ${end.x},${end.y}`;
       }
-
-      let travelled = 0;
-      const wavy = samples.map((pt, i) => {
-        const prev = samples[Math.max(i - 1, 0)];
-        const next = samples[Math.min(i + 1, samples.length - 1)];
-        if (i > 0) travelled += Math.hypot(pt.x - prev.x, pt.y - prev.y);
-        const tx = next.x - prev.x;
-        const ty = next.y - prev.y;
-        const len = Math.hypot(tx, ty) || 1;
-        const offset = ripple * Math.sin((travelled / wavelength) * Math.PI * 2);
-        return {
-          x: clampX(pt.x + (-ty / len) * offset),
-          y: pt.y + (tx / len) * offset,
-        };
-      });
-
-      const d = wavy
-        .map((pt, i) => `${i === 0 ? 'M' : 'L'}${pt.x.toFixed(1)},${pt.y.toFixed(1)}`)
-        .join(' ');
       setWave({ d, width: box.width, height: box.height });
     };
 
@@ -234,7 +223,7 @@ const ProcessSteps = () => {
                   ref={el => cardRefs.current[index] = el}
                   data-index={index}
                   className={`
-                    mb-20 last:mb-0 md:mb-12
+                    mb-24 last:mb-0 md:mb-12
                     opacity-0 translate-y-8
                     transition-all duration-700
                     ${index === 0 ? 'md:ml-0' : ''}
