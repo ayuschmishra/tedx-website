@@ -36,8 +36,8 @@ const ProcessSteps = () => {
     cardRefs.current = cardRefs.current.slice(0, processSteps.length);
   }, [processSteps.length]);
 
-  // Build a flowing path from card to card, using the cards' real positions
-  // so it lines up on every screen size (mobile and desktop).
+  // Build a wavy path that snakes from card to card, using the cards' real
+  // positions so it lines up on every screen size (mobile and desktop).
   useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -45,48 +45,32 @@ const ProcessSteps = () => {
     const buildWave = () => {
       const box = container.getBoundingClientRect();
       // offsetLeft/offsetTop ignore the fade-in transform, so the line doesn't jump
-      const cards = cardRefs.current.filter(Boolean).map(card => ({
-        left: card.offsetLeft,
-        right: card.offsetLeft + card.offsetWidth,
-        top: card.offsetTop,
-        bottom: card.offsetTop + card.offsetHeight,
-        cx: card.offsetLeft + card.offsetWidth / 2,
-        cy: card.offsetTop + card.offsetHeight / 2,
+      const points = cardRefs.current.filter(Boolean).map(card => ({
+        x: card.offsetLeft + card.offsetWidth / 2,
+        y: card.offsetTop + card.offsetHeight / 2,
       }));
-      if (cards.length < 2) return;
+      if (points.length < 2) return;
 
-      // Smooth river-like curves: each one slips out from under a card and
-      // flows into the next. The ends are tucked under the cards (inset).
-      const isDesktop = box.width >= 768;
-      const inset = 24;
-      let d = '';
-      for (let i = 0; i < cards.length - 1; i++) {
-        const from = cards[i];
-        const to = cards[i + 1];
-        let start, end, c1, c2;
+      // Big S-curves from card centre to card centre, with a short lead-in
+      // above the first card and a tail below the last one.
+      const amplitude = Math.min(box.width * 0.35, 220);
+      const clampX = x => Math.min(Math.max(x, 0), box.width);
+      const first = points[0];
+      const last = points[points.length - 1];
+      const all = [
+        { x: first.x, y: Math.max(first.y - 60, 0) },
+        ...points,
+        { x: last.x, y: Math.min(last.y + 60, box.height) },
+      ];
 
-        if (isDesktop) {
-          // Leave from the side facing the next card, sweep across, then
-          // curve down into the top of the next card.
-          const goingRight = to.cx > from.cx;
-          start = { x: goingRight ? from.right - inset : from.left + inset, y: from.cy };
-          end = { x: to.cx, y: to.top + inset };
-          c1 = { x: start.x + (end.x - start.x) * 0.75, y: start.y };
-          c2 = { x: end.x, y: start.y + (end.y - start.y) * 0.35 };
-        } else {
-          // Stacked cards: a gentle S-bend through the gap.
-          const sway = box.width * 0.22;
-          const side = i % 2 === 0 ? 1 : -1;
-          start = { x: from.cx, y: from.bottom - inset };
-          end = { x: to.cx, y: to.top + inset };
-          const dy = end.y - start.y;
-          c1 = { x: start.x + sway * side, y: start.y + dy * 0.5 };
-          c2 = { x: end.x - sway * side, y: end.y - dy * 0.5 };
-        }
-
-        // Join segments underneath the card so the path stays continuous.
-        d += i === 0 ? `M${start.x},${start.y}` : ` L${start.x},${start.y}`;
-        d += ` C${c1.x},${c1.y} ${c2.x},${c2.y} ${end.x},${end.y}`;
+      let d = `M${all[0].x},${all[0].y}`;
+      for (let i = 0; i < all.length - 1; i++) {
+        const a = all[i];
+        const b = all[i + 1];
+        const dy = b.y - a.y;
+        const side = i % 2 === 0 ? 1 : -1;
+        d += ` C${clampX(a.x + amplitude * side)},${a.y + dy * 0.5}`;
+        d += ` ${clampX(b.x - amplitude * side)},${b.y - dy * 0.5} ${b.x},${b.y}`;
       }
       setWave({ d, width: box.width, height: box.height });
     };
@@ -223,7 +207,7 @@ const ProcessSteps = () => {
                   ref={el => cardRefs.current[index] = el}
                   data-index={index}
                   className={`
-                    mb-24 last:mb-0 md:mb-12
+                    mb-20 last:mb-0 md:mb-12
                     opacity-0 translate-y-8
                     transition-all duration-700
                     ${index === 0 ? 'md:ml-0' : ''}
@@ -239,7 +223,7 @@ const ProcessSteps = () => {
                 >
                   <div 
                     className={`
-                      relative overflow-hidden rounded-lg shadow-2xl bg-[#161616]
+                      relative overflow-hidden rounded-lg shadow-2xl
                       transform transition-all duration-500
                       ${animatedItem === index ? 'scale-105 shadow-tedx-red/30' : 'scale-100'}
                     `}
